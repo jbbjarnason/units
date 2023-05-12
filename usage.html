@@ -67,12 +67,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-configuration-properties">Conan Configuration Properties</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#build-all">build_all</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#skip-docs">skip_docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-build-all">user.build:all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-build-skip-la">user.build:skip_la</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-build-skip-docs">user.build:skip_docs</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#cmake-options">CMake Options</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#units-as-system-headers">UNITS_AS_SYSTEM_HEADERS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#units-build-la">UNITS_BUILD_LA</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#units-build-docs">UNITS_BUILD_DOCS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#units-downcast-mode">UNITS_DOWNCAST_MODE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#units-iwyu">UNITS_IWYU</a></li>
@@ -276,8 +278,8 @@ rather then just <code class="docutils literal notranslate"><span class="pre">de
 </section>
 <section id="conan-configuration-properties">
 <h3>Conan Configuration Properties<a class="headerlink" href="#conan-configuration-properties" title="Permalink to this heading"></a></h3>
-<section id="build-all">
-<h4>build_all<a class="headerlink" href="#build-all" title="Permalink to this heading"></a></h4>
+<section id="user-build-all">
+<h4>user.build:all<a class="headerlink" href="#user-build-all" title="Permalink to this heading"></a></h4>
 <p><strong>Values</strong>: <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 <p>Enables compilation of all the source code (tests and examples) and generating the documentation.
@@ -285,11 +287,18 @@ To support this it requires some additional Conan build dependencies described i
 <a class="reference internal" href="#repository-structure-and-dependencies">Repository Structure and Dependencies</a>.
 It also runs unit tests during Conan build (unless <code class="docutils literal notranslate"><span class="pre">tools.build:skip_test</span></code> configuration property is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p>
 </section>
-<section id="skip-docs">
-<h4>skip_docs<a class="headerlink" href="#skip-docs" title="Permalink to this heading"></a></h4>
+<section id="user-build-skip-la">
+<h4>user.build:skip_la<a class="headerlink" href="#user-build-skip-la" title="Permalink to this heading"></a></h4>
 <p><strong>Values</strong>: <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
-<p>If <a class="reference internal" href="#build-all">build_all</a> is enabled, among others, Conan installs the documentation generation dependencies (i.e. doxygen) and
+<p>If <a class="reference internal" href="#user-build-all">user.build:all</a> is enabled, among others, Conan installs the external <a href="#id4"><span class="problematic" id="id5">`wg21-linear_algebra&lt;https://conan.io/center/wg21-linear_algebra&gt;`_</span></a>
+dependency and enables compilation of linear algebra based usage examples. Such behavior can be disabled with this option.</p>
+</section>
+<section id="user-build-skip-docs">
+<h4>user.build:skip_docs<a class="headerlink" href="#user-build-skip-docs" title="Permalink to this heading"></a></h4>
+<p><strong>Values</strong>: <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<p>If <a class="reference internal" href="#user-build-all">user.build:all</a> is enabled, among others, Conan installs the documentation generation dependencies (i.e. doxygen) and
 turns on the project documentation generation. Such behavior can be disabled with this option.</p>
 </section>
 </section>
@@ -300,6 +309,12 @@ turns on the project documentation generation. Such behavior can be disabled wit
 <p><strong>Values</strong>: <code class="docutils literal notranslate"><span class="pre">ON</span></code>/<code class="docutils literal notranslate"><span class="pre">OFF</span></code></p>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">OFF</span></code></p>
 <p>Exports library as system headers.</p>
+</section>
+<section id="units-build-la">
+<h4>UNITS_BUILD_LA<a class="headerlink" href="#units-build-la" title="Permalink to this heading"></a></h4>
+<p><strong>Values</strong>: <code class="docutils literal notranslate"><span class="pre">ON</span></code>/<code class="docutils literal notranslate"><span class="pre">OFF</span></code></p>
+<p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">ON</span></code></p>
+<p>Enables building code depending on the linear algebra library.</p>
 </section>
 <section id="units-build-docs">
 <h4>UNITS_BUILD_DOCS<a class="headerlink" href="#units-build-docs" title="Permalink to this heading"></a></h4>
@@ -520,8 +535,8 @@ cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class=
 you should:</p>
 <ol class="arabic simple">
 <li><p>Use the <em>CMakeLists.txt</em> from the top-level directory.</p></li>
-<li><p>Run Conan with <a class="reference internal" href="#build-all">build_all</a> = <code class="docutils literal notranslate"><span class="pre">True</span></code>
-(use <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">build_docs=False</span></code> if you want to skip the documentation generation).</p></li>
+<li><p>Run Conan with <a class="reference internal" href="#user-build-all">user.build:all</a> = <code class="docutils literal notranslate"><span class="pre">True</span></code>
+(use <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">user.build:skip_docs=True</span></code> if you want to skip the documentation generation).</p></li>
 </ol>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpusz/units.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>units
 conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>-pr<span class="w"> </span>&lt;your_conan_profile&gt;<span class="w"> </span>-s<span class="w"> </span>compiler.cppstd<span class="o">=</span><span class="m">20</span><span class="w"> </span>-c<span class="w"> </span>user.build:all<span class="o">=</span>True<span class="w"> </span>-c<span class="w"> </span>user.build:skip_docs<span class="o">=</span>True<span class="w"> </span>-b<span class="w"> </span>missing
@@ -544,7 +559,7 @@ cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class=
 <ol class="arabic simple">
 <li><p>Use the <em>CMakeLists.txt</em> from the top-level directory.</p></li>
 <li><p>Obtain Python dependencies.</p></li>
-<li><p>Run Conan with <a class="reference internal" href="#build-all">build_all</a> = <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p>Run Conan with <a class="reference internal" href="#user-build-all">user.build:all</a> = <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 </ol>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpusz/units.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>units
 pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
