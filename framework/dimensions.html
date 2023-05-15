@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -68,10 +69,10 @@
 <li class="toctree-l2"><a class="reference internal" href="arithmetics.html">Arithmetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="constants.html">Quantity Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conversions_and_casting.html">Conversions and Casting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="angular_units.html">Angular Units</a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_output.html">Text Output</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../defining_systems.html">Defining Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use Cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design.html">Design Deep Dive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -153,6 +154,18 @@ obtain those back easily with:</p>
 <a class="reference internal" href="../glossary.html#term-derived-quantity"><span class="xref std std-term">derived quantities</span></a> and are derived from base
 quantities. This means that they are created by multiplying or dividing
 quantities of other dimensions.</p>
+<p>The <a class="reference internal" href="../references.html#sibrochure" id="id1"><span>[SIBrochure]</span></a> states:</p>
+<blockquote>
+<div><p>All other quantities, with the exception of counts, are derived quantities, which may be
+written in terms of base quantities according to the equations of physics. The dimensions of
+the derived quantities are written as products of powers of the dimensions of the base
+quantities using the equations that relate the derived quantities to the base quantities.
+In general the dimension of any quantity <span class="math notranslate nohighlight">\(Q\)</span> is written in the form of a dimensional product,</p>
+<p><span class="math notranslate nohighlight">\(dim Q = T^\alpha L^\beta M^\gamma I^\delta \Theta^\varepsilon N^\zeta J^\eta\)</span></p>
+<p>where the exponents <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(\delta\)</span>, <span class="math notranslate nohighlight">\(\varepsilon\)</span>,
+<span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span>, which are generally small integers, which can be positive,
+negative, or zero, are called the dimensional exponents.</p>
+</div></blockquote>
 <p>Looking at the previous code snippets the area, speed, or frequency are
 the examples of such quantities. Each derived quantity can be represented
 as a unique list of exponents of base quantities. For example:</p>

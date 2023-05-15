@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Text Output" href="text_output.html" />
-    <link rel="prev" title="Conversions and Casting" href="conversions_and_casting.html" /> 
+    <link rel="next" title="Use Cases" href="../use_cases.html" />
+    <link rel="prev" title="The International System of Units (SI)" href="si.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,25 +52,17 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework Basics</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="basic_concepts.html">Basic Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quantity_like.html">Quantity-like Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quantities.html">Quantities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quantity_points.html">Quantity Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quantity_kinds.html">Quantity Kinds</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dimensions.html">Dimensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="magnitudes.html">Magnitudes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="units.html">Units</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arithmetics.html">Arithmetics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="constants.html">Quantity Constants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conversions_and_casting.html">Conversions and Casting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../framework.html">Framework Basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../defining_systems.html">Defining Systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="isq.html">International System of Quantities (ISQ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="si.html">The International System of Units (SI)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Angular Units</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#some-background-information">Some background information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#angular-quantities-in-the-si">Angular quantities in the <span class="xref std std-term">SI</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#angular-quantities-in-the-library">Angular quantities in the library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#radians-and-degrees-support">Radians and degrees support</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="text_output.html">Text Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use Cases</a></li>
@@ -107,10 +99,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../framework.html">Framework Basics</a></li>
+          <li class="breadcrumb-item"><a href="../defining_systems.html">Defining Systems</a></li>
       <li class="breadcrumb-item active">Angular Units</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/framework/angular_units.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/defining_systems/angular_units.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -174,6 +166,35 @@ The explanation of these changes would be considerably easier and more rewarding
 can be measured in terms of the Planck constant.</p>
 </div></blockquote>
 </section>
+<section id="angular-quantities-in-the-si">
+<h2>Angular quantities in the <a class="reference internal" href="../glossary.html#term-SI"><span class="xref std std-term">SI</span></a><a class="headerlink" href="#angular-quantities-in-the-si" title="Permalink to this heading"></a></h2>
+<p>Even though the <a class="reference internal" href="../glossary.html#term-SI"><span class="xref std std-term">SI</span></a> somehow ignores the dimensionality of angle:</p>
+<blockquote>
+<div><p>Plane and solid angles, when expressed in radians and steradians respectively, are in effect
+also treated within the SI as quantities with the unit one. The symbols <span class="math notranslate nohighlight">\(rad\)</span>
+and <span class="math notranslate nohighlight">\(sr\)</span> are written explicitly where appropriate, in order to emphasize that, for radians or
+steradians, the quantity being considered is, or involves the plane angle or solid angle
+respectively. For steradians it emphasizes the distinction between units of flux and intensity
+in radiometry and photometry for example. However, it is a long-established practice in
+mathematics and across all areas of science to make use of <span class="math notranslate nohighlight">\(rad = 1\)</span> and <span class="math notranslate nohighlight">\(sr = 1\)</span>.
+For historical reasons the radian and steradian are treated as derived units.</p>
+</div></blockquote>
+<p>It also explicitly states:</p>
+<blockquote>
+<div><p>The SI unit of frequency is hertz, the SI unit of angular velocity and angular frequency is
+radian per second, and the SI unit of activity is becquerel, implying counts per second.
+Although it is formally correct to write all three of these units as the reciprocal second, the
+use of the different names emphasizes the different nature of the quantities concerned. It is
+especially important to carefully distinguish frequencies from angular frequencies, because
+by definition their numerical values differ by a factor of <span class="math notranslate nohighlight">\(2\pi\)</span>. Ignoring this fact may cause
+an error of <span class="math notranslate nohighlight">\(2\pi\)</span>. Note that in some countries, frequency values are conventionally expressed
+using “cycle/s” or “cps” instead of the SI unit <span class="math notranslate nohighlight">\(Hz\)</span>, although “cycle” and “cps” are not units
+in the SI. Note also that it is common, although not recommended, to use the term
+frequency for quantities expressed in <span class="math notranslate nohighlight">\(rad/s\)</span>. Because of this, it is recommended that
+quantities called “frequency”, “angular frequency”, and “angular velocity” always be given
+explicit units of <span class="math notranslate nohighlight">\(Hz\)</span> or <span class="math notranslate nohighlight">\(rad/s`\)</span> and not <span class="math notranslate nohighlight">\(s^{-1}\)</span>.</p>
+</div></blockquote>
+</section>
 <section id="angular-quantities-in-the-library">
 <h2>Angular quantities in the library<a class="headerlink" href="#angular-quantities-in-the-library" title="Permalink to this heading"></a></h2>
 <p>The mp-units library strives to define physically-correct quantities and their units to provide maximum help
@@ -220,7 +241,7 @@ You can find more information about this constant in <a class="reference interna
 </section>
 <section id="radians-and-degrees-support">
 <h2>Radians and degrees support<a class="headerlink" href="#radians-and-degrees-support" title="Permalink to this heading"></a></h2>
-<p>Thanks to <a class="reference internal" href="magnitudes.html#magnitudes"><span class="std std-ref">Magnitudes</span></a> usage the library provides efficient strong types for all
+<p>Thanks to <a class="reference internal" href="../framework/magnitudes.html#magnitudes"><span class="std std-ref">Magnitudes</span></a> usage the library provides efficient strong types for all
 angular types. This means that with the built-in support for magnitudes of <span class="math notranslate nohighlight">\(\pi\)</span> we can provide
 accurate conversions between radians and degrees. The library also provides common trigonometric functions
 for angular quantities:</p>
@@ -249,7 +270,7 @@ Glide angle:
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The above <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">rate_of_climb</span></code> in the production code should be modelled as
-<a class="reference internal" href="quantity_kinds.html#quantity-kinds"><span class="std std-ref">Quantity Kinds</span></a>.
+<a class="reference internal" href="../framework/quantity_kinds.html#quantity-kinds"><span class="std std-ref">Quantity Kinds</span></a>.
 A better but longer code can be found in the <a class="reference internal" href="../examples/basics/glide_computer.html#glide-computer"><span class="std std-ref">glide_computer</span></a> example.</p>
 </div>
 </section>
@@ -259,8 +280,8 @@ A better but longer code can be found in the <a class="reference internal" href=
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="conversions_and_casting.html" class="btn btn-neutral float-left" title="Conversions and Casting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="text_output.html" class="btn btn-neutral float-right" title="Text Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="si.html" class="btn btn-neutral float-left" title="The International System of Units (SI)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../use_cases.html" class="btn btn-neutral float-right" title="Use Cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

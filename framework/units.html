@@ -79,10 +79,10 @@
 <li class="toctree-l2"><a class="reference internal" href="arithmetics.html">Arithmetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="constants.html">Quantity Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conversions_and_casting.html">Conversions and Casting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="angular_units.html">Angular Units</a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_output.html">Text Output</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../defining_systems.html">Defining Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use Cases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design.html">Design Deep Dive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -328,6 +328,14 @@ units we could end up with some strange, misleading, and sometimes
 wrong definitions (“kilo square metre” seams strange and spelled
 as <code class="docutils literal notranslate"><span class="pre">km²</span></code> would be invalid).</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="../references.html#sibrochure" id="id1"><span>[SIBrochure]</span></a> states:</p>
+<blockquote>
+<div><p>However, when prefixes are used with SI units, the resulting units are no
+longer coherent, because the prefix introduces a numerical factor other than one.</p>
+</div></blockquote>
+</div>
 </section>
 </section>
 <section id="derived-units">
@@ -336,8 +344,20 @@ as <code class="docutils literal notranslate"><span class="pre">km²</span></cod
 <a class="reference internal" href="../glossary.html#term-derived-quantity"><span class="xref std std-term">derived quantities</span></a>. They can either have their own unique
 names (i.e. <code class="docutils literal notranslate"><span class="pre">N</span></code> (newton)) or can be composed from the names of units of quantities
 used to define thier derived quantity (i.e. <code class="docutils literal notranslate"><span class="pre">km/h</span></code>).</p>
+<p>The <a class="reference internal" href="../references.html#sibrochure" id="id2"><span>[SIBrochure]</span></a> states:</p>
+<blockquote>
+<div><p>Derived units are defined as products of powers of the base units. When the numerical
+factor of this product is one, the derived units are called coherent derived units. The base
+and coherent derived units of the SI form a coherent set, designated the set of coherent SI
+units. The word “coherent” here means that equations between the numerical values of
+quantities take exactly the same form as the equations between the quantities themselves.</p>
+</div></blockquote>
 <section id="derived-named-units">
 <h3>Derived Named Units<a class="headerlink" href="#derived-named-units" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="../references.html#sibrochure" id="id3"><span>[SIBrochure]</span></a> also says:</p>
+<blockquote>
+<div><p>Some of the coherent derived units in the SI are given special names.</p>
+</div></blockquote>
 <p>Derived named units have a unique symbol (i.e. <code class="docutils literal notranslate"><span class="pre">N</span></code> (newton) or <code class="docutils literal notranslate"><span class="pre">Pa</span></code>
 (pascal)) and they are defined in the same way as base units (which
 always have to be a named unit):</p>
