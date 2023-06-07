@@ -359,9 +359,16 @@ struct quantity_spec<Self, QS, Eq, Args...> : quantity_spec<Self, QS, Args...> {
 
 #else
 
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+#endif
 #define QUANTITY_SPEC(name, ...)                                                  \
   inline constexpr struct name : ::mp_units::quantity_spec<name, ##__VA_ARGS__> { \
   } name
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 
@@ -429,6 +436,8 @@ struct derived_quantity_spec :
  * for which all the exponents of the factors corresponding to the base dimensions are zero.
  */
 QUANTITY_SPEC(dimensionless, derived_quantity_spec<>{});
+//inline constexpr struct dimensionless : ::mp_units::quantity_spec<dimensionless, derived_quantity_spec<>{}> {
+//} dimensionless;
 
 template<QuantitySpec Q>
 [[nodiscard]] consteval QuantitySpec auto get_kind(Q q);
@@ -628,13 +637,12 @@ template<Dimension D1, Dimension D2>
     return type_name<D1>() < type_name<D2>();
 }
 
-template<QuantitySpec Lhs, QuantitySpec Rhs, bool lhs_eq = requires { Lhs::_equation_; },
-         bool rhs_eq = requires { Rhs::_equation_; }, ratio lhs_compl = get_complexity(Lhs{}),
-         ratio rhs_compl = get_complexity(Rhs{})>
+template<QuantitySpec Lhs, QuantitySpec Rhs>
+//requires requires { Lhs::_equation_; Rhs::_equation_; }
 struct ingredients_less :
-    std::bool_constant<(lhs_compl > rhs_compl) ||
-                       (lhs_compl == rhs_compl && ingredients_dimension_less(Lhs::dimension, Rhs::dimension)) ||
-                       (lhs_compl == rhs_compl && Lhs::dimension == Rhs::dimension &&
+    std::bool_constant<(get_complexity(Lhs{}) > get_complexity(Rhs{})) ||
+                       (get_complexity(Lhs{}) == get_complexity(Rhs{}) && ingredients_dimension_less(Lhs::dimension, Rhs::dimension)) ||
+                       (get_complexity(Lhs{}) == get_complexity(Rhs{}) && Lhs::dimension == Rhs::dimension &&
                         type_name<Lhs>() < type_name<Rhs>())> {};
 
 template<typename T1, typename T2>
@@ -655,6 +663,8 @@ struct explode_to_equation_result {
   Q equation;
   specs_convertible_result result;
 };
+template<QuantitySpec Q>
+explode_to_equation_result(Q, specs_convertible_result) -> explode_to_equation_result<Q>;
 
 template<QuantitySpec Q>
   requires requires { Q::_equation_; }
@@ -685,6 +695,8 @@ struct explode_result {
     return {quantity, std::min(result, res.result)};
   }
 };
+template<QuantitySpec Q>
+explode_result(Q) -> explode_result<Q>;
 
 template<int Complexity, IntermediateDerivedQuantitySpec Q>
 [[nodiscard]] consteval auto explode(Q q);
@@ -745,7 +757,7 @@ template<int Complexity, QuantitySpec Q, typename Den, typename... Dens>
 template<int Complexity, QuantitySpec Q>
 [[nodiscard]] consteval auto explode(Q, type_list<>, type_list<>)
 {
-  return explode_result{dimensionless};
+  return explode_result<decltype(dimensionless)>{dimensionless};
 }
 
 template<int Complexity, IntermediateDerivedQuantitySpec Q>
@@ -862,7 +874,7 @@ template<typename From, typename To>
       return extract_results{true, pow<from_ratio.num, from_ratio.den>(typename From::factor{}),
                              pow<to_ratio.num, to_ratio.den>(typename To::factor{}), prepend_rest::no};
     } else
-      return extract_results{true, qfrom, qto, prepend_rest::no};
+      return extract_results<From, To>{true, qfrom, qto, prepend_rest::no}; // todo is this correct
   } else {
     auto normalize = []<typename Q>(Q) {
       if constexpr (is_specialization_of_power<Q>)
@@ -877,7 +889,7 @@ template<typename From, typename To>
     constexpr auto to_factor = std::get<0>(to_norm);
     constexpr auto to_exp = std::get<1>(to_norm);
     if constexpr (from_factor.dimension != to_factor.dimension)
-      return extract_results{false};
+      return extract_results<decltype(dimensionless)>{false}; // todo is this okay
     else if constexpr (from_exp > to_exp)
       return extract_results{true, pow<to_exp.num, to_exp.den>(from_factor), pow<to_exp.num, to_exp.den>(to_factor),
                              prepend_rest::first,

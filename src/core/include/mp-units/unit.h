@@ -316,6 +316,8 @@ struct canonical_unit {
   M mag;
   U reference_unit;
 };
+template<Magnitude M, Unit U>
+canonical_unit(M, U) -> canonical_unit<M, U>;
 
 template<Unit T, basic_symbol_text Symbol, detail::QuantityKindSpec auto Q>
 [[nodiscard]] consteval auto get_canonical_unit_impl(T t, const named_unit<Symbol, Q>&);

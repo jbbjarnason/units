@@ -231,7 +231,11 @@ struct expr_simplify<type_list<T, NRest...>, type_list<T, DRest...>, Pred> :
 
 template<typename T, ratio Num, ratio Den>
 struct expr_simplify_power {
+#if __cpp_consteval >= 201811L
   static constexpr ratio r = Num - Den;
+#else
+  static constexpr ratio r{ Num.num - Den.num, Num.den };
+#endif
   using type = power_or_T<T, ratio{abs(r.num), r.den}>;
   using num = conditional<(r > 0), type_list<type>, type_list<>>;
   using den = conditional<(r < 0), type_list<type>, type_list<>>;

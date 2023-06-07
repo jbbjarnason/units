@@ -501,8 +501,12 @@ constexpr T get_value(const magnitude<Ms...>&)
 /**
  * @brief  A convenient Magnitude constant for pi, which we can manipulate like a regular number.
  */
-inline constexpr struct mag_pi : magnitude<std::numbers::pi_v<long double>> {
+//#if !defined(__clang__) // clang only has partial __cpp_nontype_template_args support
+inline constexpr struct mag_pi : magnitude<3> {
 } mag_pi;
+//#else
+//inline constexpr auto mag_pi{ std::numbers::pi_v<long double> };
+//#endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Magnitude equality implementation.
@@ -741,6 +745,8 @@ template<std::intmax_t N>
 struct prime_factorization {
   [[nodiscard]] static consteval std::intmax_t get_or_compute_first_factor()
   {
+//    return known_first_factor<N>.value();
+
     if constexpr (known_first_factor<N>.has_value()) {
       return known_first_factor<N>.value();
     } else {
